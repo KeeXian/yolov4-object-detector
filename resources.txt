@@ -1,0 +1,6 @@
+Main reference: https://github.com/erentknn/yolov4-object-detection
+
+Additional references:
+https://github.com/opencv/opencv/blob/master/samples/dnn/object_detection.py
+https://www.pyimagesearch.com/2020/06/01/opencv-social-distancing-detector/
+https://github.com/AlexeyAB/darknet
