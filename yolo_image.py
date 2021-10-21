@@ -27,9 +27,9 @@ NMS_THRESHOLD = 0.4
 
 # Phase 3: Declare a YOLOv4 model and its labels
 # Configure the paths to YOLOv4 files
-weights = "yolo/yolov4.weights"
-labels = "yolo/labels.txt"
-cfg = "yolo/yolov4.cfg"
+weights = "yolo-tiny/yolov4-tiny.weights"
+labels = "yolo-tiny/labels.txt"
+cfg = "yolo-tiny/yolov4-tiny.cfg"
 print("You are now using {} as weights ,{} as configs and {} as labels.".format(weights, cfg, labels))
 
 # Extract labels from "labels.txt" in yolo folder
