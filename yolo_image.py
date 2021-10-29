@@ -22,7 +22,7 @@ import cv2 as cv
 import numpy as np
 
 # Phase 2: Define Confidence and NMS Threshold
-CONFIDENCE_THRESHOLD = 0.5
+CONFIDENCE_THRESHOLD = 0.3
 NMS_THRESHOLD = 0.4
 
 # Phase 3: Declare a YOLOv4 model and its labels
@@ -54,20 +54,18 @@ net.setPreferableTarget(cv.dnn.DNN_TARGET_CUDA)
 
 # get all the layer names
 layer = net.getLayerNames()
-layer = [layer[i[0] - 1] for i in net.getUnconnectedOutLayers()]
+test = [net.getUnconnectedOutLayers()]
+layer = [layer[i[0] - 1] for i in test]
 
 # Function to perform object detection
-def detect(image, nn):
+def detect(image):
+	nn = net
 
 	# Phase 4: Use YOLOv4 to perform detection
 	# Normalize, scale and reshape image to be a suitable input to the neural network
 	blob = cv.dnn.blobFromImage(image, 1/255, (416, 416), swapRB=True, crop=False)
 	print("image.shape:", image.shape)
 	print("blob.shape:", blob.shape)
-
-	blob_show = blob.reshape(blob.shape[3], blob.shape[1]*blob.shape[2], 1)
-	cv.imshow("Blob", blob_show)
-	cv.waitKey(0)
 	
 	# Set the blob as input of neural network
 	nn.setInput(blob)
@@ -129,15 +127,3 @@ def detect(image, nn):
 			cv.putText(image, text, (x, y -5), cv.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
 
 	return image
-
-# Phase 6: Read Image and Detect Objects
-# Read image using opencv
-image = cv.imread("examples/outing.jpg")
-cv.imshow("image", image)
-cv.waitKey(0)
-
-# Run detector
-detected_image = detect(image, net)
-cv.imshow("image", image)
-cv.waitKey(0)
-cv.destroyAllWindows()
